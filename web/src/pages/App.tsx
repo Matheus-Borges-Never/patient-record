@@ -1,9 +1,10 @@
 import React from 'react';
-import Login from '../components/login';
+import './style.scss';
+import Register from '../components/register';
 
 function App() {
   return (
-    <Login />
+      <Register />
   );
 }
 
