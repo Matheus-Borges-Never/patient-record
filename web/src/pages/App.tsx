@@ -1,11 +1,17 @@
-import React from 'react';
 import './style.scss';
 import Register from '../components/register';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import axios from 'axios';
+import Login from '../components/login';
 
 function App() {
   return (
-      <Register />
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={ <Login /> } />
+        <Route path='/register' element={ <Register /> } />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -46,8 +46,7 @@ h2 {
     }
 }
 
-button {
-    background-color: #0069d9;
+.button {
     border: none;
     border-radius: 5px;
     color: #fff;
@@ -55,9 +54,9 @@ button {
     font-weight: bold;
     padding: 13px;
     width: 100%;
+    margin-bottom: 4px;
 
     &:hover {
-        background-color: #0056b3;
-        border: 4px solid #0056b3;
+        border: 4px solid;
     }
 }
