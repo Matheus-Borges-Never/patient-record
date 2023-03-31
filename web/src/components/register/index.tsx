@@ -5,13 +5,20 @@ import axios from 'axios';
 
 function Register() {
 	const [name, setName] = useState("");
-  	const [email, setEmail] = useState("");
-  	const [password, setPassword] = useState("");
-
-  	const handleSubmitRegister = (event: React.FormEvent<HTMLFormElement>) => {
-    	event.preventDefault();
-    	console.log(`Name: ${name} Email: ${email} Password: ${password}`);
-  	};
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+  
+	const handleSubmitRegister = () => {
+	  axios.post("http://localhost:3001/register", {
+		name,
+		email,
+		password
+	  }).then(response => {
+		console.log(response);
+	  }).catch(error => {
+		console.log(error);
+	  });
+	};
 
   	return (
       <div>
@@ -23,7 +30,7 @@ function Register() {
 			  	id="name"
 			    type="text"
 			    value={name}
-			    onChange={(event) => setName(event.target.value)}
+			    onChange={e => setName(e.target.value)}
 			    required
 			  />
 			</div>
@@ -34,7 +41,7 @@ function Register() {
 			  	id="email"
 			    type="email"
 			    value={email}
-			    onChange={(event) => setEmail(event.target.value)}
+			    onChange={e => setEmail(e.target.value)}
 			    required
 			  />
 			</div>
@@ -45,7 +52,7 @@ function Register() {
 			  	id="password"
 			    type="password"
 			    value={password}
-			    onChange={(event) => setPassword(event.target.value)}
+			    onChange={e => setPassword(e.target.value)}
 			    required
 			  />
 			</div>
