@@ -49,7 +49,9 @@ function Register() {
 			  />
 			</div>
 			<br />
-			<button type="submit">Cadastrar</button>
+			<footer>
+				<button type="submit">Cadastrar</button>
+			</footer>
         </form>
       </div>
     );
