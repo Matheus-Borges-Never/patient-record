@@ -37,7 +37,7 @@ $ npm run start
 # Com outro terminal acesse a pasta do projeto no seu terminal/cmd
 $ cd saas-ecommerce-web
 
-# Acesse a pasta baclend do projeto no seu terminal/cmd
+# Acesse a pasta backend do projeto no seu terminal/cmd
 $ cd api
 
 # Instale as dependências
