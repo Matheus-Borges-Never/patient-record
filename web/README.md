@@ -18,10 +18,10 @@ Além disto é bom ter um editor para trabalhar com o código como [VSCode](http
 ```bash
 
 # Clone este repositório
-$ git clone https://github.com/Pr-Imobiliaria/saas-ecommerce-web.git
+$ git clone https://github.com/Matheus-Borges-Never/patient-record.git
 
 # Acesse a pasta do projeto no seu terminal/cmd
-$ cd saas-ecommerce-web
+$ cd patient-record
 
 # Acesse a pasta frontend do projeto no seu terminal/cmd
 $ cd web
@@ -33,6 +33,21 @@ $ npm install
 $ npm run start
 
 # A aplicação será aberta na porta:3000 - acesse http://localhost:3000
+
+# Com outro terminal acesse a pasta do projeto no seu terminal/cmd
+$ cd patient-record
+
+# Acesse a pasta backend do projeto no seu terminal/cmd
+$ cd api
+
+# Instale as dependências
+$ npm install
+
+# Execute a aplicação em modo de desenvolvimento
+$ node index.js
+
+# A aplicação será aberta na porta:3001 - acesse http://localhost:3000
+
 
 ```
 
