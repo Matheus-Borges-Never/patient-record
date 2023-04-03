@@ -2,8 +2,13 @@ $text-color: #333;
 $input-bg-color: #f5f5f5;
 $input-border-color: #ddd;
 
-form {
-    background-color: #fff;
+body {
+    overflow: hidden;
+    background-color: #144572;
+}
+
+.formLogin {
+    background-color: #ffffff65;
     border-radius: 5px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
     margin: 15% auto;

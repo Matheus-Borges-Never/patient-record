@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./style.scss";
+import redirectToGithub from "../../utils/github";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useHistory } from 'react-router-use-history'
+import { useHistory } from "react-router-use-history";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -21,12 +22,18 @@ function Login() {
         history.push("/home");
       })
       .catch(() => {
-        alert("Não foi possível fazer o login. Verifique seu email e senha e tente novamente.");
+        alert(
+          "Não foi possível fazer o login. Verifique seu email e senha e tente novamente."
+        );
       });
   };
 
+  const handleSubmitGithub = () => {
+    redirectToGithub();
+  };
+
   return (
-    <div>
+    <div className="formLogin">
       <form onSubmit={handleSubmitLogin}>
         <h2>Login</h2>
         <div className="text-field">
@@ -63,7 +70,14 @@ function Login() {
               Criar conta
             </button>
           </Link>
+          <br />
+          <hr></hr>
         </footer>
+      </form>
+      <form onSubmit={handleSubmitGithub}>
+        <button type="submit" value="github" className="btn btn-dark button">
+          Entrar com GitHub
+        </button>
       </form>
     </div>
   );
