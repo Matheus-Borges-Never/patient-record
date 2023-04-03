@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import "./style.scss";
-import redirectToGithub from "../../utils/github";
+import "../../style/style.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-use-history";
+import qs from "query-string";
+
+const CLIENT_ID = "d92ba6935bdf41e6e3ba";
+const BACK_END_URL = "http://localhost:3001/callback";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -29,7 +32,33 @@ function Login() {
   };
 
   const handleSubmitGithub = () => {
-    redirectToGithub();
+    const GITHUB_AUTH_URL = 'https://github.com/login/oauth/authorize';
+    const params = {
+      response_type: 'code',
+      scope: 'user:email',
+      client_id: CLIENT_ID,
+      redirect_url: BACK_END_URL,
+      state: 'test-t5'
+    }
+  
+    const queryStrings = qs.stringify(params);
+    const authorizationUrl = `${GITHUB_AUTH_URL}?${queryStrings}`;
+    window.location.href = authorizationUrl;
+  }
+  
+  window.onload = async () => {
+    const { code } = qs.parseUrl(window.location.href).query;
+    if(code) {
+      try {
+        const response = await axios.post(`${process.env.BACK_END_URL}`, { code });
+        const user = response.data;
+        alert("você está logado, meu chapa! dá uma olhada no console!");
+        console.log(user);
+      } catch (err) {
+        alert("ops, deu algum xabú");
+        console.log("err", err);
+      }
+    }
   };
 
   return (
@@ -74,8 +103,12 @@ function Login() {
           <hr></hr>
         </footer>
       </form>
-      <form onSubmit={handleSubmitGithub}>
-        <button type="submit" value="github" className="btn btn-dark button">
+      <form>
+        <button
+          type="button"
+          className="btn btn-dark button"
+          onClick={handleSubmitGithub}
+        >
           Entrar com GitHub
         </button>
       </form>

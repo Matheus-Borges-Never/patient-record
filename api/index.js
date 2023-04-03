@@ -90,7 +90,7 @@ app.post("/login", (req, res) => {
   );
 });
 
-app.post("/github", async (req, res) => {
+app.post("/callback", async (req, res) => {
   try {
     const token = await exchangeCodeForAccessToken(req.body.code);
     const user = await fetchUser(token);
