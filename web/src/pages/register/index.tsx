@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./style.scss";
+import "../../style/style.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { validateEmailFormat, validatePasswordFormat, validateNameFormat  } from '../../utils/validadores'
+import { validateEmailFormat, validatePasswordFormat, validateNameFormat  } from '../../utils/validates/validadores'
 
 function Register() {
   const [name, setName] = useState("");
@@ -42,7 +42,7 @@ function Register() {
   }
 
   return (
-    <div className="register-page">
+    <div className="register-page formLogin">
       <form onSubmit={handleSubmitRegister}>
         <h2>Criar Cadastro</h2>
         <div className="text-field">

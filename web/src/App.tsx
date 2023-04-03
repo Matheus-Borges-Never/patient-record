@@ -1,7 +1,6 @@
 import './style.scss';
 import Register from './pages/register';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import axios from 'axios';
 import Login from './pages/login';
 import Home from './pages/home';
 
