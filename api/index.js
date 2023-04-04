@@ -29,7 +29,7 @@ app.post("/register", (req, res) => {
   const password = req.body.password;
 
   connection.query(
-    "SELECT * FROM pacientes WHERE email = ?",
+    "SELECT * FROM usuario WHERE email = ?",
     [email],
     (error, result) => {
       if (error) {
@@ -42,7 +42,7 @@ app.post("/register", (req, res) => {
       }
       const hash = bcrypt.hashSync(password, saltRounds);
       connection.query(
-        "INSERT INTO pacientes (nome, email, senha) VALUES (?, ?, ?)",
+        "INSERT INTO usuario (nome, email, senha) VALUES (?, ?, ?)",
         [name, email, hash],
         (error, result) => {
           if (error) {
@@ -62,7 +62,7 @@ app.post("/login", (req, res) => {
   const password = req.body.password;
 
   connection.query(
-    "SELECT * FROM pacientes WHERE email = ?",
+    "SELECT * FROM usuario WHERE email = ?",
     [email],
     (error, result) => {
       if (error) {
@@ -86,6 +86,42 @@ app.post("/login", (req, res) => {
           res.status(400).json({ msg: "Senha incorreta" });
         }
       });
+    }
+  );
+});
+
+app.post("/patient", (req, res) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  const phone = req.body.phone;
+  const birthdate = req.body.birthdate;
+  const treatment = req.body.treatment;
+  const status = req.body.status;
+
+  connection.query(
+    "SELECT * FROM paciente WHERE email = ?",
+    [email],
+    (error, result) => {
+      if (error) {
+        res.sendStatus(500);
+        return;
+      }
+      if (result.length > 0) {
+        res.status(409).json({ msg: "Paciente já cadastrado" });
+        return;
+      }
+      connection.query(
+        "INSERT INTO paciente (nome, email, telefone, data_nascimento, tratamento, status_atual) VALUES (?, ?, ?, ?, ?, ?)",
+        [name, email, phone, birthdate, treatment, status],
+        (error, result) => {
+          if (error) {
+            console.error(error);
+            res.sendStatus(500);
+            return;
+          }
+          res.sendStatus(201);
+        }
+      );
     }
   );
 });

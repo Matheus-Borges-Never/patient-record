@@ -5,9 +5,9 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import {
   validateEmailFormat,
-  validatePasswordFormat,
   validateNameFormat,
 } from "../../utils/validates/validadores";
+import { error } from "console";
 
 function Form() {
   const [id] = useState("");
@@ -43,7 +43,7 @@ function Form() {
         alert("Paciente foi cadastrado com sucesso!");
       })
       .catch(() => {
-        alert("Esse email já foi cadastrado");
+        alert("opps!");
       });
   };
 
@@ -131,14 +131,20 @@ function Form() {
           <div className="col">
             <div className="text-field">
               <label htmlFor="status">Status:</label>
-              <select className="form-select" id="status" required>
+              <select
+                className="form-select"
+                id="status"
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                required
+              >
                 <option selected disabled value="status">
                   Status...
                 </option>
-                <option>Negociando</option>
-                <option>Em Tratamento</option>
-                <option>Cancelado</option>
-                <option>Concluido</option>
+                <option value="Negociando">Negociando</option>
+                <option value="Em Tratamento">Em Tratamento</option>
+                <option value="Cancelado">Cancelado</option>
+                <option value="Concluido">Concluido</option>
               </select>
               {errorMessage && (
                 <span className="invalid-feedback">{errorMessage}</span>
