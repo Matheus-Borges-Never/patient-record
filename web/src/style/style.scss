@@ -12,6 +12,21 @@ body {
     background-color: #144572 !important;
 }
 
+.navbar {
+    border-radius: 5px;
+    box-shadow: 0px 1px 1px $details-color;
+    border-color: $details-color;
+}
+
+.titleNavbar {
+    color: #fff !important;
+}
+
+.buttonLogout,
+.buttonAdd {
+    border-radius: 100% !important;
+}
+
 .formLogin {
     background-color: #ffffff00;
     border-radius: 5px;
@@ -41,13 +56,30 @@ h2 {
         color: $text-color;
     }
 
-    input[type="text"], 
-    input[type="email"],
-    input[type="password"] {
+    input {
         padding: 10px;
         font-size: 16px;
         border: none;
-        border-bottom: 2px solid #0765bd; 
+        border-bottom: 2px solid #0765bd;
+        background-color: #144572;
+        color: $text-color;
+        outline: none;
+        border-radius: 5px;
+
+        &:focus {
+            border-color: $details-color;
+        }
+
+        &:hover {
+            border-color: $details-color;
+        }
+    }
+
+    select {
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-bottom: 2px solid #0765bd;
         background-color: #144572;
         color: $text-color;
         outline: none;
@@ -76,4 +108,63 @@ h2 {
     &:hover {
         border: 4px solid #0765bd;
     }
+}
+
+.containerAdd {
+    max-width: 1250px !important;
+    margin: 11% auto 0% 0%;
+}
+
+.buttonAdd {
+    color: #fff !important;
+
+    &:hover {
+        background-color: #e4f2ff1a !important;
+    }
+}
+
+.buttonEdit {
+    border: none;
+    background-color: #ffffff00;
+    color: #0dbe25;
+}
+
+.buttonDelete {
+    border: none;
+    background-color: #ffffff00;
+    color: #be0d0d;
+}
+
+.tablePatientes {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px $details-color;
+    border-color: $details-color;
+    margin: 1% auto;
+    max-width: 1250px;
+    padding: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    color: $text-color;
+}
+
+tbody {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #3a6186;
+
+}
+
+.modalSpace {
+    background-color: #144572;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px $details-color;
+    border-color: $details-color;
+    margin: 17% auto;
+    max-width: 1250px;
+    padding: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #ffffff;
 }

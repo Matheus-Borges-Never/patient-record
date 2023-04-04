@@ -28,7 +28,7 @@ function Register() {
         password,
       })
       .then(() => {
-        alert("Paciente foi cadastrado com sucesso!");
+        alert("Conta cadastrada com sucesso!");
       })
       .catch(() => {
 		alert("Esse email já foi cadastrado");
