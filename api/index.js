@@ -126,30 +126,77 @@ app.post("/patient", (req, res) => {
   );
 });
 
+app.get("/patient", (req, res) => {
+  connection.query("SELECT * FROM paciente", (error, result) => {
+    if (error) return res.json(error);
+    return res.status(200).json(result);
+  });
+});
+
+app.put("/patient/:id", (req, res) => {
+  const id = req.params.id;
+  const name = req.body.name;
+  const email = req.body.email;
+  const phone = req.body.phone;
+  const birthdate = req.body.birthdate;
+  const treatment = req.body.treatment;
+  const status = req.body.status;
+
+  connection.query(
+    "UPDATE paciente SET nome = ?, email = ?, telefone = ?, data_nascimento = ?, tratamento = ?, status_atual = ? WHERE id = ?",
+    [name, email, phone, birthdate, treatment, status, id],
+    (error, result) => {
+      if (error) {
+        console.error(error);
+        res.sendStatus(500);
+        return;
+      }
+      res.sendStatus(200);
+    }
+  );
+});
+
+app.delete("/patient/:id", (req, res) => {
+  const id = req.params.id;
+
+  connection.query(
+    "DELETE FROM paciente WHERE id = ?",
+    [id],
+    (error, result) => {
+      if (error) {
+        console.error(error);
+        res.sendStatus(500);
+        return;
+      }
+      res.sendStatus(200);
+    }
+  );
+});
+
 app.post("/callback", async (req, res) => {
   try {
     const token = await exchangeCodeForAccessToken(req.body.code);
     const user = await fetchUser(token);
-  } catch(err) {
+  } catch (err) {
     console.log("err", err.response.data);
     res.sendStatus(500);
   }
 });
 
 async function exchangeCodeForAccessToken(code) {
-  const GITHUB_ACCESS_TOKEN_URL = 'https://github.com/login/oauth/access_token';
-  const {REDIRECT_URL, CLIENT_ID, CLIENT_SECRET} = process.env;
+  const GITHUB_ACCESS_TOKEN_URL = "https://github.com/login/oauth/access_token";
+  const { REDIRECT_URL, CLIENT_ID, CLIENT_SECRET } = process.env;
   const params = {
     code,
-    grant_type: 'authorization_code',
+    grant_type: "authorization_code",
     redirect_uri: REDIRECT_URL,
-    client_id: CLIENT_ID, 
+    client_id: CLIENT_ID,
     client_secret: CLIENT_SECRET,
   };
 
   const { data } = await axios.post(GITHUB_ACCESS_TOKEN_URL, params, {
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
   });
 
@@ -164,10 +211,9 @@ async function fetchUser(token) {
       Authorization: `Bearer ${token}`,
     },
   });
-  
+
   return response.data;
 }
-
 
 app.listen(3001, () => {
   console.log("rodando na porta 3001");
