@@ -44,7 +44,7 @@ $ cd api
 $ npm install
 
 # Execute a aplicação em modo de desenvolvimento
-$ node index.js
+$ npm run dev
 
 # A aplicação será aberta na porta:3001 - acesse http://localhost:3000
 
