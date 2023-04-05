@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import "../../style/style.scss";
+import "../../../style/style.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import {
   validateEmailFormat,
   validateNameFormat,
-} from "../../utils/validates/validadores";
-import { error } from "console";
+  validatePhoneFormat,
+  validateDateFormat,
+  validateTreatmentFormat,
+  validateStatusFormat,
+} from "../../../utils/validates/validadores";
 
 function Form() {
   const [id] = useState("");
@@ -22,13 +24,7 @@ function Form() {
   const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setErrorMessage("");
-
-    const isValidEmail = validateEmailFormat(email);
-    if (!isValidEmail) {
-      setErrorMessage("Email inválido. Por favor, insira um email válido.");
-      return;
-    }
-
+  
     axios
       .post("http://localhost:3001/patient", {
         id,
@@ -41,14 +37,19 @@ function Form() {
       })
       .then(() => {
         alert("Paciente foi cadastrado com sucesso!");
+        window.location.reload();
       })
-      .catch(() => {
-        alert("opps!");
-      });
-  };
+  }; 
 
   const validateInput = () => {
-    return validateEmailFormat(email) && validateNameFormat(name);
+    return (
+      validateEmailFormat(email) &&
+      validateNameFormat(name) &&
+      validatePhoneFormat(phone) &&
+      validateDateFormat(birthdate) &&
+      validateTreatmentFormat(treatment) &&
+      validateStatusFormat(status)
+    );
   };
 
   return (
@@ -138,7 +139,7 @@ function Form() {
                 onChange={(e) => setStatus(e.target.value)}
                 required
               >
-                <option selected disabled value="status">
+                <option selected value="status">
                   Status...
                 </option>
                 <option value="Negociando">Negociando</option>

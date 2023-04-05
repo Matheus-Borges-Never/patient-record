@@ -11,8 +11,28 @@ const validateNameFormat = (name: string) => {
     return name?.toString().length > 2
 }
 
+const validatePhoneFormat = (phone: string) => {
+    return phone?.toString().length > 10
+}
+
+const validateDateFormat = (birthdate: string) => {
+    return birthdate?.toString().length > 8
+}
+
+const validateTreatmentFormat = (treatment: string) => {
+    return treatment?.toString().length > 1
+}
+
+const validateStatusFormat = (status: string) => {
+    return status?.toString().length > 6
+}
+
 export {
     validateEmailFormat,
     validatePasswordFormat,
-    validateNameFormat
+    validateNameFormat,
+    validatePhoneFormat,
+    validateDateFormat,
+    validateTreatmentFormat,
+    validateStatusFormat
 }
