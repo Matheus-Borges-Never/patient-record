@@ -9,10 +9,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const connection = mysql.createConnection({
-  host: "localhost",
+  host: "containers-us-west-41.railway.app",
   user: "root",
-  password: "123456",
-  database: "consultorio",
+  port: "7325",
+  password: "fkOaPFvOzlXBtBzAEcuV",
+  database: "railway",
 });
 
 const saltRounds = 10;
