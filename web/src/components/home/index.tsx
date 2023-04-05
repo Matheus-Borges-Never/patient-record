@@ -4,22 +4,35 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "../../components/navbar";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import Form from "../../components/form";
+import Form from "../form/create";
+import FormUpdate from "../form/update";
 import axios from "axios";
+import {
+  validateEmailFormat,
+  validateNameFormat,
+  validatePhoneFormat,
+  validateDateFormat,
+  validateTreatmentFormat,
+  validateStatusFormat,
+} from "../../utils/validates/validadores";
 
 function Home() {
   const [users, setUsers] = useState([]);
   const [open, setOpen] = React.useState(false);
+  const [openEdit, setOpenEdit] = React.useState(false);
   const handleOpen = () => setOpen(true);
+  const handleOpenEdit = () => setOpenEdit(true);
   const handleClose = () => setOpen(false);
-  const [id] = useState("");
-  const [name] = useState("");
-  const [email] = useState("");
-  const [phone] = useState("");
-  const [birthdate] = useState("");
-  const [treatment] = useState("");
-  const [status] = useState("");
+  const handleCloseEdit = () => setOpenEdit(false);
+  const [id, setId] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [birthdate, setBirthdate] = useState('');
+  const [treatment, setTreatment] = useState('');
+  const [status, setStatus] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
@@ -45,17 +58,23 @@ function Home() {
       });
   }, []);
 
-  const handleEdit = () => {
-    alert("Alterar ainda não configurado");
+  const handleDelete = async (id: any) => {
+    axios.delete("http://localhost:3001/patient/" + id).then(() => {
+      window.location.reload();
+      alert("Paciente foi excluido com sucesso!");
+    });
   };
 
-  const handleDelete = async (id: any) => {
-    axios
-      .delete("http://localhost:3001/patient/" + id)
-      .then(() => {
-        window.location.reload();
-        alert("Paciente foi excluido com sucesso!");
-      })
+  const setData = (user: any) => {
+    handleOpenEdit();
+    let { id, nome, email, telefone, data_nascimento, tratamento, status_atual } = user;
+        localStorage.setItem('Id', id);
+        localStorage.setItem('Nome', nome);
+        localStorage.setItem('Email', email);
+        localStorage.setItem('Telefone', telefone);
+        localStorage.setItem('Data Nascimento', data_nascimento);
+        localStorage.setItem('Tratamento', tratamento);
+        localStorage.setItem('Status', status_atual);
   };
 
   function formatBirthdate(date: string) {
@@ -113,7 +132,7 @@ function Home() {
                     <button
                       type="button"
                       className="buttonEdit"
-                      onClick={handleOpen}
+                      onClick={() => setData(user)}
                     >
                       <span className="material-symbols-outlined">edit</span>
                     </button>
@@ -133,6 +152,17 @@ function Home() {
           </table>
         )}
       </div>
+
+      <Modal
+        open={openEdit}
+        onClose={handleCloseEdit}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box className="modalSpace">
+          <FormUpdate />
+        </Box>
+      </Modal>
 
       <Modal
         open={open}

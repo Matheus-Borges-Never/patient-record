@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../style/style.scss";
+import "../../../style/style.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import {
@@ -9,7 +9,7 @@ import {
   validateDateFormat,
   validateTreatmentFormat,
   validateStatusFormat,
-} from "../../utils/validates/validadores";
+} from "../../../utils/validates/validadores";
 
 function Form() {
   const [id] = useState("");
