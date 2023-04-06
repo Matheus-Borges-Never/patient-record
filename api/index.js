@@ -11,7 +11,6 @@ dotenv.config();
 const connection = mysql.createConnection({
   host: "containers-us-west-41.railway.app",
   user: "root",
-  port: "7325",
   password: "fkOaPFvOzlXBtBzAEcuV",
   database: "railway",
 });
