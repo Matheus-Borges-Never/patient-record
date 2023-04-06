@@ -43,6 +43,12 @@ $ cd api
 # Instale as dependências
 $ npm install
 
+# Configure o banco de dados, lembrando de colar o script que está na pasta ../stringBd no seu arquivo sql 
+$ host: "(SEU HOST, GERALMENTE É `localhost`)",
+$ user: "(SEU USER, GERALMENTE É `root`)",
+$ password: "(SUA SENHA LOCAL)",
+$ database: "consultorio",
+
 # Execute a aplicação em modo de desenvolvimento
 $ node index.js
 
